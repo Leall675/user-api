@@ -4,7 +4,6 @@ import com.leal.users_api.application.dto.UserDto;
 import com.leal.users_api.application.dto.UserDtoResponse;
 import com.leal.users_api.application.validation.UserValidation;
 import com.leal.users_api.domain.User;
-import com.leal.users_api.domain.port.out.UserEventPublisher;
 import com.leal.users_api.infrastructure.UserRepositoryAdapter;
 import com.leal.users_api.infrastructure.config.Mapper;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ public class UserServiceImpl implements UserService{
     private final UserRepositoryAdapter userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserValidation userValidation;
-    private final UserEventPublisher userEventPublisher;
 
     @Override
     public UserDtoResponse register(UserDto userDto) {
@@ -30,7 +28,6 @@ public class UserServiceImpl implements UserService{
         userValidation.validateUser(userDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userSaved = userRepository.save(user);
-        userEventPublisher.publishUserCreated(userDto);
         return mapper.toDto(userSaved);
     }
 
