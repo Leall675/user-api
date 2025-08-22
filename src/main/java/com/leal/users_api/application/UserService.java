@@ -1,4 +1,11 @@
 package com.leal.users_api.application;
 
-public class UserService {
+import com.leal.users_api.application.dto.UserDto;
+import com.leal.users_api.application.dto.UserDtoResponse;
+
+import java.util.List;
+
+public interface UserService {
+    UserDtoResponse register(UserDto userDto);
+    List<UserDtoResponse> findAll();
 }
