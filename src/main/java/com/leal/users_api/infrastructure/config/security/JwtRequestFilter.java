@@ -1,5 +1,6 @@
 package com.leal.users_api.infrastructure;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.leal.users_api.domain.User;
 import com.leal.users_api.domain.UserRepository;
 import com.leal.users_api.infrastructure.config.security.JwtUtil;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,20 +37,25 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = recoverToken(request);
-        if (token != null) {
-            String cpf = jwtUtil.extractUsername(token);
-            if (cpf != null) {
-                User user = userRepository.findByCpf(cpf).orElse(null);
-                if (user != null) {
-                    var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-                    var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                    log.info("Usuário autenticado: {}", user.getCpf());
+        try {
+            if (token != null) {
+                String cpf = jwtUtil.extractUsername(token);
+                if (cpf != null) {
+                    User user = userRepository.findByCpf(cpf).orElse(null);
+                    if (user != null) {
+                        var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+                        var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                        log.info("Usuário autenticado: {}", user.getCpf());
+                    }
                 }
             }
+        } catch (JWTVerificationException e) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\": \"" + e.getMessage() + "\"}");
+            return;
         }
-        log.info(">>> Filtro chamado! Token: {}", token);
-
         filterChain.doFilter(request, response);
     }
 

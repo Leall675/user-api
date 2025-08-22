@@ -58,8 +58,8 @@ public class JwtUtil {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception) {
-            log.error("Erro ao extrair o nome de usuário do token: {}", exception.getMessage());
-            return null;
+            log.error("Token inválido: {}", exception.getMessage());
+            throw new JWTVerificationException("Token inválido ou expirado");
         }
     }
 
