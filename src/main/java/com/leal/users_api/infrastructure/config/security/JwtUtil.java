@@ -67,7 +67,7 @@ public class JwtUtil {
         return Algorithm.HMAC256(SECRET_KEY);
     }
 
-    private Instant generateExpirationDate() {
+    public Instant generateExpirationDate() {
         return Instant.now().plus(1, ChronoUnit.HOURS);
     }
 }

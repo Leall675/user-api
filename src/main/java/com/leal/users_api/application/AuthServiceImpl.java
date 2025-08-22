@@ -1,5 +1,6 @@
 package com.leal.users_api.application;
 
+import com.leal.users_api.application.dto.TokenDtoResponse;
 import com.leal.users_api.application.dto.UserDto;
 import com.leal.users_api.domain.User;
 import com.leal.users_api.infrastructure.config.Mapper;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -21,12 +25,14 @@ public class AuthServiceImpl implements AuthService {
     private final Mapper mapper;
 
     @Override
-    public String login(UserDto userDto) {
+    public TokenDtoResponse login(UserDto userDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDto.getCpf(), userDto.getPassword())
         );
         User user = mapper.toEntity(userDto);
-
-        return jwtUtil.generateToken(user);
+        String token = jwtUtil.generateToken(user);
+        Instant expiresAt = jwtUtil.generateExpirationDate();
+        long expiresIn = ChronoUnit.SECONDS.between(Instant.now(), expiresAt);
+        return new TokenDtoResponse(token, "Bearer", expiresIn);
     }
 }

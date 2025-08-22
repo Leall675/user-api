@@ -1,6 +1,7 @@
 package com.leal.users_api.web;
 
 import com.leal.users_api.application.AuthService;
+import com.leal.users_api.application.dto.TokenDtoResponse;
 import com.leal.users_api.application.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,9 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping()
-    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
-        String token = authService.login(userDto);
-        return ResponseEntity.ok(token);
+    @PostMapping("/login")
+    public ResponseEntity<TokenDtoResponse> login(@RequestBody UserDto userDto) {
+        TokenDtoResponse tokenDtoResponse = authService.login(userDto);
+        return ResponseEntity.ok(tokenDtoResponse);
     }
 }

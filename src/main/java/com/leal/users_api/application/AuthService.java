@@ -1,7 +1,8 @@
 package com.leal.users_api.application;
 
+import com.leal.users_api.application.dto.TokenDtoResponse;
 import com.leal.users_api.application.dto.UserDto;
 
 public interface AuthService {
-    String login(UserDto userDto);
+    TokenDtoResponse login(UserDto userDto);
 }
