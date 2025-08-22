@@ -1,4 +1,4 @@
-package com.leal.users_api.infrastructure;
+package com.leal.users_api.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leal.users_api.application.dto.UserDto;
