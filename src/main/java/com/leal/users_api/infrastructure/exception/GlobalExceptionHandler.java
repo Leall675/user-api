@@ -8,6 +8,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -63,6 +64,15 @@ public class GlobalExceptionHandler {
         resposta.setMessage(ex.getMessage());
         resposta.setErros(List.of());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(resposta);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErroResposta> handleBadCredentialsException(BadCredentialsException ex) {
+        ErroResposta resposta = new ErroResposta();
+        resposta.setStatus(HttpStatus.UNAUTHORIZED.value());
+        resposta.setMessage(ex.getMessage());
+        resposta.setErros(List.of());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resposta);
     }
 
 }
