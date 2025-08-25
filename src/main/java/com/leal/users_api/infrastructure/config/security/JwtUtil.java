@@ -25,12 +25,13 @@ public class JwtUtil {
             return JWT.create()
                     .withIssuer("users-api")
                     .withSubject(user.getCpf())
+                    .withClaim("roles", user.getRoles().stream().map(Enum::name).toList())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(getAlgorithm());
 
         } catch (JWTCreationException exception) {
             log.error("Erro ao gerar token: {}", exception.getMessage());
-            throw new RuntimeException("Error ao se autenticar");
+            throw new RuntimeException("Erro ao se autenticar");
         }
     }
 
