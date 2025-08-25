@@ -1,6 +1,7 @@
 package com.leal.users_api.application.dto;
 
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.leal.users_api.domain.enuns.RolesEnum;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -9,10 +10,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
     @NotEmpty(message = "CPF cannot be empty")
     @Size(min = 11, max = 11, message = "CPF must be exactly 11 digits")
@@ -21,4 +25,5 @@ public class UserDto {
     @NotEmpty(message = "Password cannot be empty")
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
+    private List<RolesEnum> roles;
 }
