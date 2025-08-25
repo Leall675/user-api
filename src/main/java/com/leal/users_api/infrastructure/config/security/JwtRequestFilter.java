@@ -46,8 +46,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         var authorities = user.getRoles().stream()
                                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
                                 .toList();
-                        var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
                         log.info("Roles encontradas: {}", user.getRoles());
+                        var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                         log.info("Usuário autenticado: {}", user.getCpf());
                     }
