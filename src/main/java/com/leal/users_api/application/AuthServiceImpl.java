@@ -1,5 +1,6 @@
 package com.leal.users_api.application;
 
+import com.leal.users_api.application.dto.LoginDto;
 import com.leal.users_api.application.dto.TokenDtoResponse;
 import com.leal.users_api.application.dto.UserDto;
 import com.leal.users_api.domain.User;
@@ -25,11 +26,11 @@ public class AuthServiceImpl implements AuthService {
     private final Mapper mapper;
 
     @Override
-    public TokenDtoResponse login(UserDto userDto) {
+    public TokenDtoResponse login(LoginDto userDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDto.getCpf(), userDto.getPassword())
         );
-        User user = mapper.toEntity(userDto);
+        User user = mapper.toLogin(userDto);
         String token = jwtUtil.generateToken(user);
         Instant expiresAt = jwtUtil.generateExpirationDate();
         long expiresIn = ChronoUnit.SECONDS.between(Instant.now(), expiresAt);

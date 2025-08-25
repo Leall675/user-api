@@ -1,6 +1,7 @@
 package com.leal.users_api.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leal.users_api.application.dto.LoginDto;
 import com.leal.users_api.application.dto.UserDto;
 import com.leal.users_api.application.dto.UserDtoResponse;
 import com.leal.users_api.domain.User;
@@ -18,6 +19,10 @@ public class Mapper {
 
     public UserDtoResponse toDto(User user) {
         return objectMapper.convertValue(user, UserDtoResponse.class);
+    }
+
+    public User toLogin(LoginDto loginDto) {
+        return objectMapper.convertValue(loginDto, User.class);
     }
 
 }
