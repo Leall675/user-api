@@ -14,6 +14,6 @@ import java.util.List;
 public class ErroResposta {
     private long status;
     private String message;
-    List<ErroCampo> erros;
+    private List<ErroCampo> erros;
 
 }
