@@ -3,7 +3,6 @@ package com.leal.users_api.infrastructure.config.security;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.leal.users_api.domain.User;
 import com.leal.users_api.domain.UserRepository;
-import com.leal.users_api.infrastructure.config.security.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -2,7 +2,6 @@ package com.leal.users_api.infrastructure.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leal.users_api.application.dto.error.ErroResposta;
-import com.leal.users_api.infrastructure.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
