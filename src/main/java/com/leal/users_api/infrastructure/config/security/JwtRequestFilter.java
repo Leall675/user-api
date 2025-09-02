@@ -1,4 +1,4 @@
-package com.leal.users_api.infrastructure;
+package com.leal.users_api.infrastructure.config.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.leal.users_api.domain.User;
