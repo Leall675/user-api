@@ -20,6 +20,9 @@ public class User {
     @Id
     private String id;
     private String cpf;
+    private String name;
+    private String email;
+    private String contactNumber;
     private String password;
     private List<RolesEnum> roles = new ArrayList<>();
 }

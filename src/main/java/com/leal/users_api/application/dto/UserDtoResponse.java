@@ -11,4 +11,7 @@ import lombok.Setter;
 public class UserDtoResponse {
     private String id;
     private String cpf;
+    private String name;
+    private String email;
+    private String contactNumber;
 }
