@@ -5,7 +5,7 @@ import com.leal.users_api.application.dto.UserDtoResponse;
 import com.leal.users_api.application.validation.UserValidation;
 import com.leal.users_api.domain.User;
 import com.leal.users_api.domain.port.out.UserEventPublisher;
-import com.leal.users_api.infrastructure.UserRepositoryAdapter;
+import com.leal.users_api.infrastructure.UserRepositoryImpl;
 import com.leal.users_api.infrastructure.config.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +19,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private final Mapper mapper;
-    private final UserRepositoryAdapter userRepository;
+    private final UserRepositoryImpl userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserValidation userValidation;
     private final UserEventPublisher userEventPublisher;

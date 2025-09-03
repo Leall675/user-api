@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserRepositoryAdapter {
+public class UserRepositoryImpl {
 
     @Autowired
     private UserRepository userRepository;
