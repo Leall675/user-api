@@ -1,4 +1,4 @@
-package com.leal.users_api.infrastructure.config.message;
+package com.leal.users_api.infrastructure.config.message.producer;
 
 import com.leal.users_api.application.dto.UserDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -12,7 +12,6 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Configuration
 public class KafkaProducerConfig {
