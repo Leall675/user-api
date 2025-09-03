@@ -6,10 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -40,4 +37,15 @@ public class UserDto {
     @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres.")
     private String password;
     private List<RolesEnum> roles;
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "cpf='" + cpf + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
