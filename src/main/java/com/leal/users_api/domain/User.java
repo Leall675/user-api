@@ -1,6 +1,6 @@
 package com.leal.users_api.domain;
 
-import com.leal.users_api.domain.enuns.RolesEnum;
+import com.leal.users_api.domain.enums.RolesEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

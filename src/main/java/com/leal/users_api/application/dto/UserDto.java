@@ -1,7 +1,7 @@
 package com.leal.users_api.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.leal.users_api.domain.enuns.RolesEnum;
+import com.leal.users_api.domain.enums.RolesEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;

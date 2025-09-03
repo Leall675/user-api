@@ -1,4 +1,4 @@
-package com.leal.users_api.domain.enuns;
+package com.leal.users_api.domain.enums;
 
 public enum RolesEnum {
     ADMIN,
