@@ -98,6 +98,14 @@
 		</dependency>
 
 
+		<!-- TWILO -->
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>11.0.0-rc.5</version>
+		</dependency>
+
+
 
 	</dependencies>
 
