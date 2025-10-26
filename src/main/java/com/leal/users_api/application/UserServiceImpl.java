@@ -6,7 +6,6 @@ import com.leal.users_api.application.dto.pagination.PageResponseDto;
 import com.leal.users_api.application.validation.UserValidation;
 import com.leal.users_api.domain.User;
 import com.leal.users_api.domain.UserRepository;
-import com.leal.users_api.domain.port.out.UserEventPublisher;
 import com.leal.users_api.infrastructure.config.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,13 +18,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final Mapper mapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserValidation userValidation;
-    private final UserEventPublisher userEventPublisher;
 
     @Override
     public UserDtoResponse register(UserDto userDto) {
@@ -33,7 +31,6 @@ public class UserServiceImpl implements UserService{
         userValidation.validateUser(userDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userSaved = userRepository.save(user);
-        userEventPublisher.publishUserCreated(userDto);
         return mapper.toDto(userSaved);
     }
 
@@ -53,7 +50,6 @@ public class UserServiceImpl implements UserService{
                 page.getTotalElements(),
                 page.getTotalPages(),
                 page.isFirst(),
-                page.isLast()
-        );
+                page.isLast());
     }
 }
